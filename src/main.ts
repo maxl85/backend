@@ -8,6 +8,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
+  
+  // Включаем CORS
+  app.enableCors({
+    origin: '*', // Разрешаем доступ с любого домена (лучше указать конкретный)
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
+  });
 
   const config = new DocumentBuilder()
     .setTitle('School X - OpenAPI 3.0')
